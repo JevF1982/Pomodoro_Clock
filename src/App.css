@@ -3,13 +3,15 @@
 }
 
 #break-container {
-  height: 200px;
+  height: 100px;
 }
 
-#breaklength-display {
+#break-length,
+#session-length,
+#time-left {
   font-size: 34px;
   margin: 20px;
   padding: 4px;
   font-family: fantasy;
-  top: -200px !important;
+  line-height: 60px;
 }

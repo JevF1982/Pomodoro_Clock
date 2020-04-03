@@ -6,16 +6,40 @@ import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 const BreakLength = () => {
   const [breakLength, setBreakLength] = useContext(BreakLengthContext);
 
+  const breakIncrement = () => {
+    let count = breakLength;
+    count++;
+
+    setBreakLength(count);
+  };
+  const breakDecrement = () => {
+    let count = breakLength;
+    if (count > 1) count--;
+
+    setBreakLength(count);
+  };
+
   return (
     <div id="break-container">
       <h3 id="break-label">Break Length</h3>
-      <span>
-        <ArrowUpwardIcon color="primary" fontSize="large" />
-      </span>
-      <span id="breaklength-display">{breakLength}</span>
-      <span>
-        <ArrowDownwardIcon color="primary" fontSize="large" />
-      </span>
+      <button>
+        <ArrowUpwardIcon
+          color="primary"
+          fontSize="large"
+          id="break-increment"
+          onClick={breakIncrement}
+        />
+      </button>
+
+      <span id="break-length">{breakLength}</span>
+      <button>
+        <ArrowDownwardIcon
+          color="primary"
+          fontSize="large"
+          id="break-decrement"
+          onClick={breakDecrement}
+        />
+      </button>
     </div>
   );
 };
