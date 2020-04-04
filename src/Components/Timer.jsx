@@ -1,6 +1,11 @@
 import React, { useContext } from "react";
 
-import { TimerContext, StartStopContext } from "./Store";
+import {
+  TimerContext,
+  StartStopContext,
+  BreakLengthContext,
+  SessionLengthContext
+} from "./Store";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PauseIcon from "@material-ui/icons/Pause";
 import SyncIcon from "@material-ui/icons/Sync";
@@ -10,6 +15,8 @@ let timerSwitch = null;
 const Timer = () => {
   const [timer, setTimer] = useContext(TimerContext);
   const [startStop, setStartStop] = useContext(StartStopContext);
+  const [breakLength, setBreakLength] = useContext(BreakLengthContext);
+  const [sessionLength, setSessionLength] = useContext(SessionLengthContext);
 
   let count = timer;
 
@@ -17,11 +24,12 @@ const Timer = () => {
   const setCountDown = () => {
     const timeSwitch = !startStop;
     setStartStop(timeSwitch);
-
     if (timeSwitch) {
       timerSwitch = setInterval(() => {
-        count--;
-        setTimer(count);
+        if (count > 0) {
+          count--;
+          setTimer(count);
+        }
       }, 1000);
     } else {
       clearInterval(timerSwitch);
@@ -29,17 +37,21 @@ const Timer = () => {
   };
 
   // convert value to time format
-  const convertSeconds = count => {
-    count = timer;
-    let minutes = Math.floor(count / 60);
-    let seconds = count - minutes * 60;
+  const convertSeconds = () => {
+    let minutes = Math.floor(timer / 60);
+    let seconds = timer % 60;
 
     if (minutes <= 9) {
       minutes = "0" + minutes;
+      if (seconds <= 9) {
+        seconds = "0" + seconds;
+      }
     } else if (seconds <= 9) {
       seconds = "0" + seconds;
     }
-    return minutes + ":" + seconds;
+    let newValue = minutes + ":" + seconds;
+
+    return newValue;
   };
 
   // reset the timer
@@ -48,6 +60,8 @@ const Timer = () => {
     setStartStop(false);
     count = 1500;
     setTimer(count);
+    setBreakLength(5);
+    setSessionLength(25);
   };
 
   return (
