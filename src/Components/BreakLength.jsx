@@ -3,7 +3,7 @@ import { BreakLengthContext, StartStopContext } from "./Store";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 
-let count = 0;
+let Breakcount = 0;
 
 const BreakLength = () => {
   const [breakLength, setBreakLength] = useContext(BreakLengthContext);
@@ -23,37 +23,27 @@ const BreakLength = () => {
   });
 
   const breakIncrement = () => {
-    count = breakLength;
-
-    if (count < 60) count++;
-    setBreakLength(count);
+    Breakcount = breakLength;
+    if (Breakcount < 60) Breakcount++;
+    setBreakLength(Breakcount);
   };
 
   const breakDecrement = () => {
-    count = breakLength;
-
-    if (count > 1) count--;
-    setBreakLength(count);
+    Breakcount = breakLength;
+    if (Breakcount > 1) Breakcount--;
+    setBreakLength(Breakcount);
   };
 
   return (
     <div id="break-container">
       <h3 id="break-label">Break Length</h3>
-      <button id="break-increment">
-        <ArrowUpwardIcon
-          color="primary"
-          fontSize="large"
-          onClick={breakIncrement}
-        />
+      <button id="break-increment" onClick={breakIncrement}>
+        <ArrowUpwardIcon color="primary" fontSize="large" />
       </button>
 
       <span id="break-length">{breakLength}</span>
-      <button id="break-decrement">
-        <ArrowDownwardIcon
-          color="primary"
-          fontSize="large"
-          onClick={breakDecrement}
-        />
+      <button id="break-decrement" onClick={breakDecrement}>
+        <ArrowDownwardIcon color="primary" fontSize="large" />
       </button>
     </div>
   );

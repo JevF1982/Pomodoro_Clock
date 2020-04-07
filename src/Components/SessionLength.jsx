@@ -29,10 +29,7 @@ const SessionLength = () => {
 
     setTimer(newTime);
 
-    console.log(timer);
-
     setSessionLength(count);
-    console.log("increment" + " " + count);
   };
   const sessionDecrement = () => {
     let count = sessionLength;
@@ -43,27 +40,18 @@ const SessionLength = () => {
     setTimer(newTime);
 
     setSessionLength(count);
-    console.log("decrement" + " " + count);
   };
 
   return (
     <div id="session-container">
       <h3 id="session-label">Session Length</h3>
-      <button id="session-increment">
-        <ArrowUpwardIcon
-          color="primary"
-          fontSize="large"
-          onClick={sessionIncrement}
-        />
+      <button id="session-increment" onClick={sessionIncrement}>
+        <ArrowUpwardIcon color="primary" fontSize="large" />
       </button>
 
       <span id="session-length">{sessionLength}</span>
-      <button id="session-decrement">
-        <ArrowDownwardIcon
-          color="primary"
-          fontSize="large"
-          onClick={sessionDecrement}
-        />
+      <button id="session-decrement" onClick={sessionDecrement}>
+        <ArrowDownwardIcon color="primary" fontSize="large" />
       </button>
     </div>
   );
