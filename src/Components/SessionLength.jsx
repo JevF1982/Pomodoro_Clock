@@ -8,6 +8,8 @@ const SessionLength = () => {
   const [timer, setTimer] = useContext(TimerContext);
   const [startStop, setStartStop] = useContext(StartStopContext);
 
+  let count = sessionLength;
+
   useEffect(() => {
     const arrowUp = document.getElementById("session-increment");
     const arrowDown = document.getElementById("session-decrement");
@@ -22,7 +24,6 @@ const SessionLength = () => {
   });
 
   const sessionIncrement = () => {
-    let count = sessionLength;
     if (count < 60) count++;
 
     const newTime = count * 60;
@@ -32,7 +33,6 @@ const SessionLength = () => {
     setSessionLength(count);
   };
   const sessionDecrement = () => {
-    let count = sessionLength;
     if (count > 1) count--;
 
     const newTime = count * 60;

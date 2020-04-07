@@ -8,9 +8,9 @@ export const StartStopContext = createContext();
 export const TypeOfTimerContext = createContext();
 
 const Store = ({ children }) => {
-  const [breakLength, setBreakLength] = useState(1);
-  const [sessionLength, setSessionLength] = useState(1);
-  const [timer, setTimer] = useState(60);
+  const [breakLength, setBreakLength] = useState(5);
+  const [sessionLength, setSessionLength] = useState(25);
+  const [timer, setTimer] = useState(1500);
   const [startStop, setStartStop] = useState(false);
   const [typeOfTimer, setTypeOfTimer] = useState("Session");
 

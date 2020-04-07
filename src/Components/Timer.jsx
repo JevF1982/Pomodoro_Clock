@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import {
   TimerContext,
@@ -21,6 +21,16 @@ const Timer = () => {
   const [typeOfTimer, setTypeofTimer] = useContext(TypeOfTimerContext);
 
   let count = timer;
+
+  useEffect(() => {
+    const warningBeep = document.getElementById("beep");
+    if (count === 0) {
+      clearInterval(timerSwitch);
+      startInterval();
+      getTypeOfTimer();
+      warningBeep.play();
+    }
+  });
 
   const getTypeOfTimer = () => {
     if (typeOfTimer === "Session" && count === 0) {
@@ -50,12 +60,11 @@ const Timer = () => {
 
   const startInterval = () => {
     timerSwitch = setInterval(() => {
-      if (count > -1) {
+      if (count > 0) {
         count--;
         setTimer(count);
-        getTypeOfTimer();
       }
-    }, 10);
+    }, 1000);
   };
 
   // convert value to time format
@@ -77,17 +86,22 @@ const Timer = () => {
 
   // reset the timer
   const resetCountdown = () => {
+    const warningBeep = document.getElementById("beep");
     clearInterval(timerSwitch);
     setStartStop(false);
+    setTypeofTimer("Session");
     setTimer(1500);
     setBreakLength(5);
     setSessionLength(25);
+    warningBeep.pause();
+    warningBeep.currentTime = 0;
   };
 
   return (
     <div id="timer-container">
       <h3 id="timer-label">{typeOfTimer}</h3>
       <div id="time-left">{convertSeconds()}</div>
+      <audio id="beep" preload="auto" src="https://goo.gl/65cBl1" />
       <button id="start_stop" onClick={setCountDown}>
         <PlayArrowIcon color="primary" />
         <PauseIcon color="primary" />
